@@ -1,55 +1,58 @@
-.FlexCol {
+.Calc {
+  margin-top: 5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.Main {
-  margin-top: 5vh;
+h1 {
+  font-size: 36px;
 }
 .Viewbar {
+  text-align: end;
+  font-size: 48px;
+  padding: 12px 20px 0 0;
   height: 80px;
-  width: 480px;
+  width: 640px;
   margin-bottom: 3vh;
   background-color: #E0E0E0;
   box-shadow: inset 0 2px 6px rgba(0,0,0,0.12), inset 0 2px 4px rgba(0,0,0,0.24);
 }
-
-.HideVB {
-  transition: ease-in;
-  opacity: 0;
-}
-
-.CalcContainer {
+.Keypad {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 .Row {
   display: flex;
+  flex-direction: row;
 }
-.Num {
-  background-color: #E0E0E0;
-}
-.Op{
-  background-color: #ef4fa6;
-}
-.Command {
-  background-color: #aaf255;
-}
-.TwoWide {
-  width: 160px;
-}
-button {
+.Button {
   font-size: 30px;
   width:  80px;
   height: 80px;
-  border-style: none;
+  display: flex;
+  user-select: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
-
-button:focus {
+.Button:hover {
+  box-shadow: inset 80px 80px 0px 0px rgba(0,0,0,0.05);
+}
+.Button:active {
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.12), inset 0 2px 4px rgba(0,0,0,0.24), inset 80px 80px 0px 0px rgba(0,0,0,0.05);
+}
+.Button:focus {
   outline: none !important;
 }
-button:hover {
-  box-shadow: inset 80px 80px 0px 0px rgba(0,0,0,0.1);
+
+.Num {
+    background-color: #E0E0E0;
 }
-button:active {
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.12), inset 0 2px 4px rgba(0,0,0,0.24), inset 80px 80px 0px 0px rgba(0,0,0,0.1);
+.Op {
+    background-color: #ef4fa6;
+}
+.Command {
+    background-color: #aaf255;
+}
+[name='q'] {
+  width: 160px;
 }
