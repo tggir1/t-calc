@@ -1,1 +1,55 @@
+.FlexCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Main {
+  margin-top: 5vh;
+}
+.Viewbar {
+  height: 80px;
+  width: 480px;
+  margin-bottom: 3vh;
+  background-color: #E0E0E0;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.12), inset 0 2px 4px rgba(0,0,0,0.24);
+}
 
+.HideVB {
+  transition: ease-in;
+  opacity: 0;
+}
+
+.CalcContainer {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.Row {
+  display: flex;
+}
+.Num {
+  background-color: #E0E0E0;
+}
+.Op{
+  background-color: #ef4fa6;
+}
+.Command {
+  background-color: #aaf255;
+}
+.TwoWide {
+  width: 160px;
+}
+button {
+  font-size: 30px;
+  width:  80px;
+  height: 80px;
+  border-style: none;
+}
+
+button:focus {
+  outline: none !important;
+}
+button:hover {
+  box-shadow: inset 80px 80px 0px 0px rgba(0,0,0,0.1);
+}
+button:active {
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.12), inset 0 2px 4px rgba(0,0,0,0.24), inset 80px 80px 0px 0px rgba(0,0,0,0.1);
+}
