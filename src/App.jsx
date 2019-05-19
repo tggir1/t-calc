@@ -4,92 +4,154 @@ import Viewbar from './components/Viewbar';
 import Keypad from './components/Keypad';
 import Button from './components/Button';
 
-
 class Calc extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      display: '',
-      lastOp: '',
-      history: []
+      fullInput: '',
+      cQuence: '',
+      decCount: 0,
+      history: [],
+      n1: null,
+      n2: null,
+      op: null
     }
     this.sortClick = this.sortClick.bind(this);
-    this.addOp = this.addOp.bind(this);
-    this.equalFunc = this.equalFunc.bind(this);
+    this.handleOp = this.handleOp.bind(this);
+    this.handleEq = this.handleEq.bind(this);
+    this.handleClear = this.handleClear.bind(this);
+    this.handleDec = this.handleDec.bind(this);
+    this.handleDel = this.handleDel.bind(this);
   }
 
   sortClick = e => {
     const symbol = e.target.getAttribute('name');
-
-    if (symbol === 'c') {
-      if (this.state.lastOp === 'c') {
-        if (window.confirm('This will erase all history. Are you sure?')) {
-          this.setState({
-            display: '',
-            ops: [],
-            lastOp: '',
-            history: []
-          });
-        }
-      } else {
+    if (/[0-9]/.test(symbol)) {
+      if (this.state.cQuence === 'c') {
         this.setState({
-          display: '',
-          lastOp: 'c',
-        });
+          cQuence: 'Num'
+        })
       }
-    }
-    else if (symbol === 'del') {
-      let tempDisplay = this.state.display;
       this.setState({
-        display: tempDisplay.slice(0, -1),
-        lastOp: 'del'
+        fullInput: this.state.fullInput + symbol
       });
-    }
-    else if (symbol === 'q') {
-      this.equalFunc(symbol);
-    }
-    else if (/\d/.test(symbol)) {
-      this.setState({
-        display: this.state.display + symbol,
-        lastOp: symbol
-      });
-    }
-    else if (symbol === '.') {
-      if (this.state.display.indexOf('.') === -1) {
-        this.setState({
-          display: this.state.display + symbol,
-          lastOp: symbol
-        });
-      }
-    } else if (symbol !== this.state.lastOp) {
+    } else {
       switch (symbol) {
+        case 'del':
+          this.handleDel(symbol);
+          break;
+        case 'c':
+          this.handleClear();
+          break;
+        case 'q':
+          this.handleEq();
+          break;
         case '+':
         case '-':
         case 'x':
         case '/':
-          this.addOp(symbol);
+          this.handleOp(symbol);
+          break;
+        case '.':
+          this.handleDec();
           break;
         case 's':
           alert('SURPRISE');
           break;
         default:
-          alert('symbol switch broke');
-      }
-    };
+          alert('shit broke');
+      };
+    }
   }
-
-  equalFunc(symbol) {
-    return alert(`func equalFunc pass: ${symbol}`);
+  handleDel = () => {
+    if (this.state.fullInput[this.state.fullInput.length - 1] === '.') {
+      this.setState({
+        decCount: this.state.decCount - 1,
+        fullInput: this.state.fullInput.slice(0, -1),
+        cQuence: 'del'
+      });
+    } else if (this.state.fullInput[this.state.fullInput.length - 1] === ' ') {
+      this.setState({
+        fullInput: this.state.fullInput.slice(0, -3),
+        cQuence: 'del'
+      });
+    } else {
+      this.setState({
+        fullInput: this.state.fullInput.slice(0, -1),
+        cQuence: 'del'
+      });
+    }
+  }
+  handleClear = () => {
+    if (this.state.cQuence === 'c') {
+      if (window.confirm('This will erase all history. Are you sure?')) {
+        this.setState({
+          fullInput: '',
+          cQuence: '',
+          history: [],
+          n1: null,
+          n2: null,
+          op: null
+        });
+      }
+    } else {
+      this.setState({
+        fullInput: '',
+        cQuence: 'c'
+      });
+    }
+  }
+  handleDec() {
+    if (this.state.fullInput.indexOf('.') === -1) {
+      this.setState({
+        fullInput: this.state.fullInput + '.',
+        cQuence: '.',
+        decCount: 1
+      });
+    } else if ((this.state.fullInput.indexOf('.') < this.state.fullInput.indexOf(this.state.cQuence)) && this.state.decCount === 1) {
+      this.setState({
+        fullInput: this.state.fullInput + '.',
+        cQuence: '.',
+        decCount: 2
+      });
+    }
+  }
+  handleOp(symbol) {
+    if (!/x|-|\/|\+/g.test(this.state.fullInput)) {
+      this.setState({
+        fullInput: this.state.fullInput + ' ' + symbol + ' ',
+        cQuence: symbol,
+      });
+    }
   };
-  addOp(symbol) {
-    return alert(`func addOp pass: ${symbol}`);
+  splitInput() {
+    return 'fuc'
+  }
+  handleEq = () => {
+    const oppyFunc = {
+      '+': (x, y) => x + y,
+      '-': (x, y) => x - y,
+      'x': (x, y) => x * y,
+      '/': (x, y) => x / y
+    };
+    this.splitInput();
+    const result = [this.state.n1, this.state.n2].reduce(oppyFunc[this.state.op]);
+    let makeHistory = [...this.state.history, ...result]
+    this.setState({
+      fullInput: result,
+      cQuence: '',
+      history: [...makeHistory],
+      n1: null,
+      n2: null,
+      op: null
+    });
   };
 
   render() {
     return (
       <div className='Calc' >
         <h1>T Wizard</h1>
-        <Viewbar display={this.state.display} />
+        <Viewbar display={this.state.fullInput} />
         <Keypad>
           <div className='Row'>
             <Button name='c' label='c' className='Command' onClick={this.sortClick} />
