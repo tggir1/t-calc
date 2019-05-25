@@ -57,7 +57,7 @@ class Calc extends React.Component {
           this.handleDec();
           break;
         case 's':
-          alert('Gothca!');
+          alert('Gotcha!');
           break;
         default:
           alert('sorry, it appears that something broke.');
