@@ -1,6 +1,7 @@
 {
   "name": "t-calc",
   "version": "0.1.0",
+  "homepage": "https://thomasg.dev/project-pages/t-wizard",
   "private": true,
   "dependencies": {
     "react": "^16.8.6",
