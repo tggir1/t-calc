@@ -1,4 +1,4 @@
-#Elefant Calculator
+# Elephant Calculator
 
 Pretty generic calculator built with react. I added a little of my own flavor by including a component which displays the 10 most recent operations. You'll also noticed the calculator can be used with only your keyboard!
 
