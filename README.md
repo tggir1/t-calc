@@ -1,11 +1,6 @@
-# T Wizard Calculator
+#Elefant Calculator
 
-This is my second react app, so it's pretty simple. The project was initiated with 'create-react-app'. 
-
-I did try to add little of my own flavor by adding a component which displays the 10 most recent operations and by enabling keyboard input.
-
-The ui loosly follows Google's Material design principles, which were helpful in creating a clean, friendly asthetic.
-
+Pretty generic calculator built with react. I added a little of my own flavor by including a component which displays the 10 most recent operations. You'll also noticed the calculator can be used with only your keyboard!
 
 # Running the calculator
 
